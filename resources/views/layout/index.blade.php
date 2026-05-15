@@ -13,7 +13,7 @@
     <!-- end favicon -->
 
     <!-- start link canonical -->
-    <link rel="canonical" href="https://scholamarchikhinskaya.ru">
+    <link rel="canonical" href="https://scholamarshikhinskaya.ru">
     <!-- end link canonical -->
 
     <!-- start styles -->
