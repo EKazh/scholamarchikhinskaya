@@ -1,0 +1,27 @@
+/* carousel styles */
+
+.carousel-item {
+    min-height: 430px;
+    height: auto;
+}
+.carousel-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .carousel-item{
+    min-height: 532px;
+    height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-item{
+    min-height: 243px;
+    height: auto;
+  }
+}
