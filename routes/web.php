@@ -55,6 +55,7 @@ Route::get('/information', [IndexController::class, 'showInformation'])->name('i
 //information pages
 Route::get('/information/basic-information', [IndexController::class, 'showBasicInformation'])->name('basic-information.show');
 Route::get('/information/structures', [IndexController::class, 'showStructures'])->name('structures.show');
+Route::get('/information/education', [IndexController::class, 'showEducation'])->name('education.show');
 Route::get('/information/management', [IndexController::class, 'showManagement'])->name('management.show');
 Route::get('/information/teaching-staff', [IndexController::class, 'showTeachingStaff'])->name('teaching-staff.show');
 Route::get('/information/paid-education', [IndexController::class, 'showPaidEducation'])->name('paid-education.show');
@@ -64,6 +65,7 @@ Route::get('/information/finances', [IndexController::class, 'showFinances'])->n
 Route::get('/information/edustandart', [IndexController::class, 'showEdustandart'])->name('edustandart.show');
 Route::get('/information/organization-of-food', [IndexController::class, 'showOrganizationOfFood'])->name('organization-of-food.show');
 Route::get('/information/material', [IndexController::class, 'showMaterial'])->name('material.show');
+Route::get('/information/vacations', [IndexController::class, 'showVacations'])->name('vacations.show');
 
 //news
 Route::get('/news-feed', [NewsController::class, 'showNewsFeed'])->name('news-feed.show');

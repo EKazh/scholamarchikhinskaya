@@ -1,5 +1,6 @@
 @extends('layout.index')
 @section('main')
+@section('title', 'МКОУ "Маршихинская СОШ" | Педагогический состав')
 <section>
     <div class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-4">

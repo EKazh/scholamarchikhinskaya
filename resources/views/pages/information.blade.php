@@ -59,7 +59,7 @@
 
             <!-- start card education -->
             <div class="col-lg-4 col-md-6">
-                <a href="#" class="text-decoration-none">
+                <a href="{{ route('education.show') }}" class="text-decoration-none">
                     <div class="card h-100 shadow-sm border-0 hover-shadow transition-300">
                         <div class="card-body text-center p-4">
                             <div class="mb-3 text-primary">
@@ -155,7 +155,7 @@
 
             <!-- start vacations -->
             <div class="col-lg-4 col-md-6">
-                <a href="#" class="text-decoration-none">
+                <a href="{{ route('vacations.show') }}" class="text-decoration-none">
                     <div class="card h-100 shadow-sm border-0 hover-shadow transition-300">
                         <div class="card-body text-center p-4">
                             <div class="mb-3 text-primary">

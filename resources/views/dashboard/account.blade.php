@@ -1,6 +1,6 @@
 @extends('layout.index')
 @section('main')
-@section('title', 'Личный кабинет — МКОУ "Маршихинская СОШ"')
+@section('title', 'Личный кабинет | МКОУ "Маршихинская СОШ"')
 <section>
     <div class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-4">

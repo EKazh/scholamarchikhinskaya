@@ -1,5 +1,6 @@
 @extends('layout.index')
 @section('main')
+@section('title', 'МКОУ "Маршихинская СОШ" | ' . ($newsItem->news_title ?? 'Новость'))
 <section>
     <div class="container py-5">
         <div class="row justify-content-center">

@@ -75,6 +75,15 @@ class IndexController extends Controller
         return view('pages.contacts');
     }
 
+    public function showEducation()
+    {
+        $languageCategory = Category::where('category_name', 'Положение о языке образования')->first();
+    
+        $languageDocuments = $languageCategory ? Document::where('category_id', $languageCategory->id)->orderBy('created_at', 'desc')->get() : collect();
+
+        return view('pages.information.education', compact('languageDocuments'));
+    }
+    
     public function showStructures()
     {
         $documents = [];
@@ -161,6 +170,20 @@ class IndexController extends Controller
     }
 
     public function showOrganizationOfFood(){
-        return view('pages.information.organization-of-food');
+
+        $menuCategory = Category::where('category_name', 'Меню ежедневного горячего питания')->first();
+        $contractCategory = Category::where('category_name', 'Контракт на оказание услуг в сфере питания')->first();
+        $supplierCategory = Category::where('category_name', 'Поставщики пищевой продукции')->first();
+    
+        $menuDocuments = $menuCategory ? Document::where('category_id', $menuCategory->id)->orderBy('created_at', 'desc')->get() : collect();
+        $contractDocuments = $contractCategory ? Document::where('category_id', $contractCategory->id)->orderBy('created_at', 'desc')->get() : collect();
+        $supplierDocuments = $supplierCategory ? Document::where('category_id', $supplierCategory->id)->orderBy('created_at', 'desc')->get() : collect();
+
+        return view('pages.information.organization-of-food', compact('menuDocuments', 'contractDocuments', 'supplierDocuments'));
+    }
+
+    public function showVacations()
+    {
+        return view('pages.information.vacations');
     }
 }
