@@ -21,8 +21,8 @@ use MoonShine\Laravel\Pages\ProfilePage;
 
 return [
     'title' => env('MOONSHINE_TITLE', 'MoonShine'),
-    'logo' => 'vendor/moonshine/logo.svg',
-    'logo_small' => 'vendor/moonshine/logo-small.svg',
+    'logo' => 'media/logo.svg',
+    'logo_small' => 'media/logo-small.svg',
 
 
     // Default flags
@@ -86,7 +86,7 @@ return [
 
     'pages' => [
         'dashboard' => App\MoonShine\Pages\Dashboard::class,
-        'profile' => ProfilePage::class,
+        'profile' => App\MoonShine\Pages\ProfilePage::class,
         'login' => LoginPage::class,
         'error' => ErrorPage::class,
     ],

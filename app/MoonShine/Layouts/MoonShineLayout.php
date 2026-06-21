@@ -80,7 +80,7 @@ final class MoonShineLayout extends AppLayout
             ->danger('#ef4444')     // красный
             ->warning('#f59e0b')    // оранжевый
             ->info('#06b6d4')       // голубой
-            ->body('#57a6f0')    // цвет боковой панели
+            ->body('#85bff5')    // цвет боковой панели
             ->text('#1a202c')  // текст  
             ->dark('#3d475f', 'DEFAULT')
             ->dark('#8a9fcc', 50)
@@ -105,11 +105,6 @@ final class MoonShineLayout extends AppLayout
             '16' => 'favicon-16x16.png',
         ]);
     }
-    
-    /*protected function getLogo(bool $small = false): Logo
-    {
-        return parent::getLogo()->svg('media/logo.svg');
-    }*/
 
     // for footer
     protected function getFooterCopyright(): string

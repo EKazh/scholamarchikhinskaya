@@ -29,8 +29,7 @@ class MoonShineServiceProvider extends ServiceProvider
     {
         $config
             ->title('МКОУ Маршихинская СОШ')
-            ->logo('media/logo.svg')
-            ->layout(\MoonShine\Laravel\Layouts\MoonShineLayout::class);
+            ->logo('media/logo.svg');
         $core
             ->resources([
                 MoonShineUserResource::class,
