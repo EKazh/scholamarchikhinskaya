@@ -28,6 +28,12 @@ class UserResource extends ModelResource
     protected string $model = User::class;
 
     protected string $title = 'Пользователи';
+
+    protected bool $createInModal = true;
+
+    protected bool $editInModal = true;
+
+    protected bool $deleteInModal = true;
     
     /**
      * @return list<FieldContract>
@@ -39,7 +45,7 @@ class UserResource extends ModelResource
             Text::make('ФИО', 'full_name'),
             Text::make('Телефон', 'phone'),
             Text::make('Email', 'email'),
-            Text::make('Роль', 'role'),
+            Text::make('Роль', 'role')->sortable(),
             Text::make('Класс', 'class_list'),
         ];
     }

@@ -25,6 +25,12 @@ class DocumentResource extends ModelResource
     protected string $model = Document::class;
 
     protected string $title = 'Документы';
+
+    protected bool $createInModal = true;
+
+    protected bool $editInModal = true;
+
+    protected bool $deleteInModal = true;
     
     /**
      * @return list<FieldContract>

@@ -39,18 +39,6 @@ class FeedbackResource extends ModelResource
     }
 
     /**
-     * @return list<ComponentContract|FieldContract>
-     */
-    protected function formFields(): iterable
-    {
-        return [
-            Box::make([
-                ID::make(),
-            ])
-        ];
-    }
-
-    /**
      * @return list<FieldContract>
      */
     protected function detailFields(): iterable

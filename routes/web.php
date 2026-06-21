@@ -97,11 +97,17 @@ Route::middleware('auth')->group(function () {
 
 //directmessages
 Route::middleware(['auth'])->group(function () {
+    Route::get('/direct-messages/{chat}', [DirectMessageController::class, 'show'])
+        ->name('direct.message.show');
+
     Route::post('/direct-message', [DirectMessageController::class, 'store'])
         ->name('direct.message.store');
 
     Route::get('/direct-messages', [DirectMessageController::class, 'index'])
         ->name('direct.messages.index');
+    
+    Route::post('/direct-messages/{chat}/reply', [DirectMessageController::class, 'reply'])
+        ->name('direct.message.reply');
 });
 
 //classes

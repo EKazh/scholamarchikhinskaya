@@ -22,6 +22,12 @@ class CategoryResource extends ModelResource
     protected string $model = Category::class;
 
     protected string $title = 'Категории';
+
+    protected bool $createInModal = true;
+
+    protected bool $editInModal = true;
+
+    protected bool $deleteInModal = true;
     
     /**
      * @return list<FieldContract>

@@ -27,6 +27,10 @@ class MoonShineServiceProvider extends ServiceProvider
      */
     public function boot(CoreContract $core, ConfiguratorContract $config): void
     {
+        $config
+            ->title('МКОУ Маршихинская СОШ')
+            ->logo('media/logo.svg')
+            ->layout(\MoonShine\Laravel\Layouts\MoonShineLayout::class);
         $core
             ->resources([
                 MoonShineUserResource::class,

@@ -53,12 +53,16 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::menu(),
-            MenuItem::make('Категории', CategoryResource::class),
+            MenuItem::make('Категории', CategoryResource::class)
+                ->icon('archive-box-x-mark'),
             MenuItem::make('Документы', DocumentResource::class)
                 ->icon('document'),
-            MenuItem::make('Новости', NewinfoResource::class),
-            MenuItem::make('Сообщения из обратной связи', FeedbackResource::class),
-            MenuItem::make('Классы', SchoolClassResource::class),
+            MenuItem::make('Новости', NewinfoResource::class)
+                ->icon('newspaper'),
+            MenuItem::make('Сообщения из обратной связи', FeedbackResource::class)
+                ->icon('envelope'),
+            MenuItem::make('Классы', SchoolClassResource::class)
+                ->icon('academic-cap'),
             MenuItem::make('Пользователи', UserResource::class)
                 ->icon('users'),
         ];
@@ -77,14 +81,35 @@ final class MoonShineLayout extends AppLayout
             ->warning('#f59e0b')    // оранжевый
             ->info('#06b6d4')       // голубой
             ->body('#57a6f0')    // цвет боковой панели
-            ->text('#212529')     // текст  
-            ->sidebar('#1e1b4b')   
-            ->sidebarText('#e2e8f0')
-            ->sidebarActive('#3b82f6');
+            ->text('#1a202c')  // текст  
+            ->dark('#3d475f', 'DEFAULT')
+            ->dark('#8a9fcc', 50)
+            ->dark('#495881', 100)
+            ->dark('#455074', 200)
+            ->dark('#495881', 300)
+            ->dark('#495881', 400)
+            ->dark('#1f2536', 500)
+            ->dark('#333e5c', 600)
+            ->dark('#405874', 700)
+            ->dark('#1f2536', 800)
+            ->dark('#242836', 900);      // темный цвет
 
         // $colorManager->primary('#00000');
     }
 
+    protected function getFaviconComponent(): Favicon
+    {
+        return parent::getFaviconComponent()->customAssets([
+            'apple-touch' => 'apple-touch-icon.png',
+            '32' => 'favicon-32x32.png',
+            '16' => 'favicon-16x16.png',
+        ]);
+    }
+    
+    /*protected function getLogo(bool $small = false): Logo
+    {
+        return parent::getLogo()->svg('media/logo.svg');
+    }*/
 
     // for footer
     protected function getFooterCopyright(): string

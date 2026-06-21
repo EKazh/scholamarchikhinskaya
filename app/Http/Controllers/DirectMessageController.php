@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class DirectMessageController extends Controller
 {
+    public function show($chatId)
+    {   
+        $user = Auth::user();
+        $chat = DirectMessage::with(['users', 'contents.user'])
+            ->findOrFail($chatId);
+
+        // Проверка: пользователь должен быть участником чата
+        if (!$chat->users->contains($user->id)) {
+            abort(403, 'У вас нет доступа к этому чату.');
+        }
+
+        return view('dashboard.direct-messages', compact('chat'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -66,16 +80,42 @@ class DirectMessageController extends Controller
         return back()->with('success', 'Сообщение отправлено.');
     }
 
+    public function reply(Request $request, $chatId)
+    {
+        $request->validate(['message' => 'required|string|max:1000']);
+        $user = Auth::user();
+
+        $chat = DirectMessage::findOrFail($chatId);
+        if (!$chat->users->contains($user->id)) {
+            abort(403);
+        }
+
+        $classIds = $user->role === 'parent' 
+            ? $user->parentClasses->pluck('id')->toArray()
+            : ($user->role === 'teacher' ? $user->teachingClasses->pluck('id')->toArray() : []);
+
+        DirectMessageContent::create([
+            'direct_message_id' => $chat->id,
+            'user_id' => $user->id,
+            'message' => $request->message,
+            'class_ids' => $classIds,
+        ]);
+
+        return redirect()->route('direct.message.show', $chat->id);
+    }
+
     // Опционально: список чатов
     public function index()
     {
         $user = Auth::user();
         $chats = DirectMessage::whereHas('users', fn($q) => $q->where('user_id', $user->id))
-            ->with(['users' => fn($q) => $q->where('id', '!=', $user->id)])
-            ->with(['contents' => fn($q) => $q->latest()->first()])
+            ->with([
+                'users' => fn($q) => $q->where('users.id', '!=', $user->id), // ✅ Уточнили таблицу
+                'contents' => fn($q) => $q->latest()->first(), // Последнее сообщение
+            ])
             ->latest()
             ->get();
 
-        return view('dashboard.direct-messages.index', compact('chats'));
+        return view('dashboard.direct-messages-index', compact('chats'));
     }
 }

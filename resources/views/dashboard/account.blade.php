@@ -26,6 +26,12 @@
                 </div>
             </div>
 
+            <div class="mb-4">
+                <a href="{{ route('direct.messages.index') }}" class="btn btn-primary">
+                    <i class="fas fa-inbox"></i> Мои сообщения
+                </a>
+            </div>
+
             <hr>
 
             <div class="row">

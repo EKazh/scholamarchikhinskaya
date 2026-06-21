@@ -24,6 +24,12 @@ class NewinfoResource extends ModelResource
     protected string $model = Newinfo::class;
 
     protected string $title = 'Новости';
+
+    protected bool $createInModal = true;
+
+    protected bool $editInModal = true;
+
+    protected bool $deleteInModal = true;
     
     /**
      * @return list<FieldContract>

@@ -22,6 +22,12 @@ class SchoolClassResource extends ModelResource
     protected string $model = SchoolClass::class;
 
     protected string $title = 'Классы';
+
+    protected bool $createInModal = true;
+
+    protected bool $editInModal = true;
+
+    protected bool $deleteInModal = true;
     
     /**
      * @return list<FieldContract>

@@ -6,6 +6,8 @@ namespace App\MoonShine\Pages;
 
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
+use App\Models\TodoItem;
+use App\MoonShine\Pages\Grid;
 #[\MoonShine\MenuManager\Attributes\SkipMenu]
 
 class Dashboard extends Page
@@ -22,7 +24,7 @@ class Dashboard extends Page
 
     public function getTitle(): string
     {
-        return $this->title ?: 'Dashboard';
+        return $this->title ?: 'Дашбоард';
     }
 
     /**

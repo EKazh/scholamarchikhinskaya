@@ -80,7 +80,7 @@ return [
     'layout' => App\MoonShine\Layouts\MoonShineLayout::class,
 
     'forms' => [
-        'login' => LoginForm::class,
+        'login' => App\MoonShine\Forms\LoginForm::class,
         'filters' => FiltersForm::class,
     ],
 
@@ -92,7 +92,7 @@ return [
     ],
 
     // Localizations
-    'locale' => 'en',
+    'locale' => 'ru',
     'locale_key' => ChangeLocale::KEY,
     'locales' => [
         // en
