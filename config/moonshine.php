@@ -24,6 +24,7 @@ return [
     'logo' => 'vendor/moonshine/logo.svg',
     'logo_small' => 'vendor/moonshine/logo-small.svg',
 
+
     // Default flags
     'use_migrations' => true,
     'use_notifications' => true,

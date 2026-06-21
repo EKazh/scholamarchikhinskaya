@@ -24,7 +24,8 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'role' => 'required|in:parent,teacher',
-            'class_id' => 'nullable|exists:school_classes,id',
+            'class_ids' => 'nullable|array',
+            'class_ids.*' => 'exists:school_classes,id',
         ], [
             'full_name.required' => 'Поле обязательно для заполнения.',
             'phone.required' => 'Поле обязательно для заполнения.',
@@ -34,13 +35,14 @@ class AuthController extends Controller
             'phone.unique' => 'Пользователь с таким телефоном уже существует.',
             'email.unique' => 'Пользователь с таким email уже существует.',
             'email.email' => 'Неверный формат email.',
-            'class_id' => 'Класс не найден.',
+            'class_ids.array' => 'Выберите один или несколько классов.',
+            'class_ids.*' => 'Один из выбранных классов недействителен.',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
 
-        if ($validated['role'] === 'teacher' && !$request->class_id) {
-            return back()->withErrors(['class_id' => 'Учитель должен быть привязан к классу.']);
+        if ($validated['role'] === 'teacher' && empty($request->class_ids)) {
+            return back()->withErrors(['class_ids' => 'Учитель должен быть привязан хотя бы к одному классу.']);
         }
 
         $user = User::create([
@@ -51,8 +53,13 @@ class AuthController extends Controller
             'role' => $validated['role'],
         ]);
 
-        if ($request->class_id) {
-            $user->classes()->attach($request->class_id, ['role' => $validated['role']]);
+        if (!empty($request->class_ids)) {
+            $classData = [];
+            foreach ($request->class_ids as $id) {
+                $classData[$id] = ['role' => $validated['role']];
+            }
+
+            $user->classes()->attach($classData);
         }
 
         auth()->login($user);

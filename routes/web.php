@@ -10,6 +10,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ClassChatController;
+use App\Http\Controllers\DirectMessageController;
+use App\Http\Controllers\ClassAssignmentController;
 
 //register
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.show');
@@ -91,4 +93,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/account', [AccountController::class, 'showAccount'])->name('account.show');
      Route::get('dashboard/class/{classId}/chat', [ClassChatController::class, 'showChat'])->name('class.chat');
     Route::post('/dashboard/class/{classId}/chat', [ClassChatController::class, 'sendMessage'])->name('message.send');
+});
+
+//directmessages
+Route::middleware(['auth'])->group(function () {
+    Route::post('/direct-message', [DirectMessageController::class, 'store'])
+        ->name('direct.message.store');
+
+    Route::get('/direct-messages', [DirectMessageController::class, 'index'])
+        ->name('direct.messages.index');
+});
+
+//classes
+Route::middleware(['auth'])->group(function () {
+    Route::post('/classes/self-assign', [ClassAssignmentController::class, 'store'])->name('class.self-assign.store');
+    // ...
 });

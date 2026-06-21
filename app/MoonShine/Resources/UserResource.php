@@ -52,6 +52,13 @@ class UserResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
+                Select::make('Роль', 'role') // <-- new
+                ->options([
+                    'parent' => 'Родитель',
+                    'teacher' => 'Учитель',
+                    'director' => 'Директор',
+                ])
+                ->required(),
                 Select::make('Классы', 'school_classes')
                 ->multiple()
                 ->options(SchoolClass::orderBy('class_number')->pluck('class_number', 'id')->toArray())
@@ -79,6 +86,7 @@ class UserResource extends ModelResource
     protected function rules(mixed $item): array
     {
         return [
+            'role' => ['required', 'in:parent,teacher,director'],
             'school_classes' => ['nullable', 'array'],
             'school_classes.*' => ['exists:school_classes,id'],
         ];
@@ -97,6 +105,12 @@ class UserResource extends ModelResource
     public function onSave(mixed $item): void
     {
         $data = request()->all();
+
+        // Update role
+        if (isset($data['role'])) {
+            $item->role = $data['role'];
+            $item->save(); // IMPORTANT: explicitly save the role first
+        }
 
         // Обновляем связь с классами ТОЛЬКО если передано
         if (isset($data['school_classes'])) {

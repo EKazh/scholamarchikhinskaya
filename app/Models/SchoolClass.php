@@ -12,7 +12,7 @@ class SchoolClass extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'class_user')->withPivot('role');
+        return $this->belongsToMany(User::class, 'class_user', 'school_class_id', 'user_id')->withPivot('role');
     }
 
     public function teachers()

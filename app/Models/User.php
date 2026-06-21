@@ -50,17 +50,20 @@ class User extends Authenticatable
 
     public function classes()
     {
-        return $this->belongsToMany(SchoolClass::class, 'class_user')->withPivot('role');
+        return $this->belongsToMany(SchoolClass::class, 'class_user', 'user_id', 'school_class_id')
+            ->withPivot('role');
     }
 
     public function teachingClasses()
     {
-        return $this->classes()->wherePivot('role', 'teacher');
+        return $this->belongsToMany(SchoolClass::class, 'class_user', 'user_id', 'school_class_id')
+            ->wherePivot('role', 'teacher');
     }
 
     public function parentClasses()
     {
-        return $this->classes()->wherePivot('role', 'parent');
+        return $this->belongsToMany(SchoolClass::class, 'class_user', 'user_id', 'school_class_id')
+            ->wherePivot('role', 'parent');
     }
 
     public function classChatMessages()
@@ -74,5 +77,10 @@ class User extends Authenticatable
     public function getClassListAttribute(): string
     {
         return $this->classes->pluck('class_number')->join(', ');
+    }
+
+    public function scopeRole($query, $role)
+    {
+        return $query->where('role', $role);
     }
 }

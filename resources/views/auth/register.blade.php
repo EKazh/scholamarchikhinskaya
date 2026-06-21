@@ -52,14 +52,14 @@
             <!-- role -->
             <div class="text-center mb-3">
                 <div class="form-check form-check-inline d-inline-block">
-                    <input class="form-check-input" type="radio" name="role" id="role" value="teacher" required>
-                    <label class="form-check-label" for="role">
+                    <input class="form-check-input @error('role') is-invalid @enderror" type="radio" name="role" id="role_teacher" value="teacher" {{ old('role') == 'teacher' ? 'checked' : '' }} required>
+                    <label class="form-check-label" for="role_teacher">
                         Учитель
                     </label>
                 </div>
                 <div class="form-check form-check-inline d-inline-block">
-                    <input class="form-check-input" type="radio" name="role" id="role" value="parent" required>
-                    <label class="form-check-label" for="role">
+                    <input class="form-check-input @error('role') is-invalid @enderror" type="radio" name="role" id="role_parent" value="parent" {{ old('role') == 'parent' ? 'checked' : '' }} required>
+                    <label class="form-check-label" for="role_parent">
                         Родитель
                     </label>
                 </div>
@@ -69,18 +69,30 @@
             </div>
 
             <!-- class selection -->
-            <div class="form-floating mb-3">
-                <select class="form-control @error('class_id') is-invalid @enderror" name="class_id" id="class_id" required>
-                    <option value="" disabled selected>Выберите класс</option>
-                    @foreach ($classes as $class)
-                        <option value="{{ $class->id }}" {{ old('class_id') == $class->id ? 'selected' : '' }}>
+            <div class="mb-3">
+            <p class="mb-2"><i class="fas fa-chalkboard"></i> Выберите класс(ы)</p>
+            <div class="row g-2">
+                @foreach ($classes as $class)
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input @error('class_ids.*') is-invalid @enderror" 
+                           type="checkbox" 
+                           name="class_ids[]" 
+                           id="class_{{ $class->id }}" 
+                           value="{{ $class->id }}" 
+                           {{ in_array($class->id, old('class_ids', [])) ? 'checked' : '' }}>
+                        <label class="form-check-label btn btn-primary w-100 text-start" for="class_{{ $class->id }}">
                             {{ $class->class_number }}
-                        </option>
-                    @endforeach
-                </select>
-                <label for="class_id"><i class="fas fa-chalkboard"></i> Класс</label>
-                @error('class_id')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                        </label>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+                @error('class_ids')
+                    <div class="d-block text-danger mt-2">{{ $message }}</div>
+                @enderror
+                @error('class_ids.*')
+                    <div class="d-block text-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
 
